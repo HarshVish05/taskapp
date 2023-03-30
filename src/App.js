@@ -5,10 +5,12 @@ import { FaBeer } from 'react-icons/fa';
 import './App.css';
 import Header from './components/Header';
 import Tasks from './components/Tasks';
+import AddTask from './components/AddTask';
 
 
 
 function App() {
+  const [showAddTask,setShowAddTask] = useState(false);
 
 const [tasks, setTasks] = useState([
 
@@ -42,8 +44,25 @@ const [tasks, setTasks] = useState([
   //   setTasks(tasks.day)
   // }
 
-  // delete task
+  // Task Reminder
+  
+  const OnTaskReminder = (id) => {
+    setTasks(
+      tasks.map((task) => task.id === id ? {...task,reminder:!task.reminder}:task)
+    )
+  }
 
+  //Add Task
+  const addTask = (task) => {
+    const id = Math.floor(Math.random()*10000+1);
+    console.log(id);
+
+    const newTask = { id, ...task}
+    setTasks([...tasks, newTask])
+ }
+
+
+  // delete task
   const deleteTask = (id) => {
     // updating the state...which excludes item whose id is passed
       setTasks(tasks.filter((task) => task.id !== id))
@@ -53,9 +72,9 @@ const [tasks, setTasks] = useState([
 
   return (
     <div className="container">
-      <Header/>
+      <Header onAdd={() => setShowAddTask(!showAddTask)} />
       {tasks.length > 0 ? 
-      <Tasks tasks={tasks} onDelete={deleteTask}/>
+      <Tasks tasks={tasks} onDelete={deleteTask} onReminder={OnTaskReminder}/>
       : 'All tasks done for Today'}
       <p>Let's relax and have a sip of</p>
       <FaBeer/>

@@ -4,11 +4,12 @@ import Button from './Button';
 
 
 
-const Task = ({ task, onDelete }) => {
+const Task = ({ task, onDelete ,onReminder}) => {
   return (
-    <div className="event">
+    <div className={`event ${task.reminder ? 'reminder':''}`} onDoubleClick={()=>
+       onReminder(task.id)}>
         <h3>
-            {task.text} 
+            {task.text} {' '}
             <FaTimes style={{color: 'red', cursor:'pointer'}}
             onClick={() => onDelete(task.id)}/>
         </h3>
