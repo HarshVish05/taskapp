@@ -8,12 +8,16 @@ const Header = ({title}) => {
     console.log(e);
   }
 
+  
+
   return (
     <header className='header'>
         <h1>{title}</h1>
         <Button color='green' text='Add' onClick={onClick}></Button>
-        <Button color='black' text='Fun' onClick={onClick}></Button>
+        <Button color='black' text='Details' onClick={onClick}></Button>
     </header>
+
+    
   )
 }
 
